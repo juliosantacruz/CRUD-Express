@@ -95,3 +95,49 @@ Crea una nueva entrada de pruducto
     "stars":4
 }
 ```
+
+
+### GET  All Categories 
+
+> http://localhost:3000/api/v1/category
+
+Regresa todos los registros
+
+### GET category
+
+http://localhost:3000/api/v1/category/:id
+
+Regresa el registro indicado con el id 
+
+### DELETE category 
+
+http://localhost:3000/api/v1/category/:id
+
+Elimina el registro del id proporcionado
+
+### PATCH update category 
+
+http://localhost:3000/api/v1/category/:id
+
+Se actualiza la entrada segun id, se debe enviar cambios
+
+```json
+{
+    
+    "name":"other name"
+
+}
+```
+
+### POST new Product 
+
+http://localhost:3000/api/v1/products
+
+Crea una nueva entrada de pruducto
+```json
+{
+   
+    "name":"product_test",
+   
+}
+```
