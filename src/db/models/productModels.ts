@@ -1,4 +1,5 @@
-import { Model, DataTypes, Sequelize } from "sequelize";
+import { Model, DataTypes, Sequelize, ModelStatic } from "sequelize";
+import { CATEGORY_TABLE } from "./categoryModels";
 
 const PRODUCTS_TABLE = "products";
 
@@ -20,24 +21,31 @@ const ProductsSchemas = {
   stars: {
     allowNull: false,
     type: DataTypes.INTEGER,
-  }
+  },
+  categoryId: {
+    field: "category_id",
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    references: { model: CATEGORY_TABLE, key: "id" },
+    onUpdate: "CASCADE",
+    onDelete: "SET NULL",
+  },
 };
 
-
-class ProductsModel extends Model{
-  static associate(){
-    //
+class ProductsModel extends Model {
+  static associate(models: any) {
+    this.belongsTo(models.Category, { as:'category'})
   }
 
-  static config(sequelize:Sequelize){
-    return{
+  static config(sequelize: Sequelize) {
+    return {
       sequelize,
       tableName: PRODUCTS_TABLE,
-      modelName:'Products',
-      timestamps:false,
-    }
+      modelName: "Product",
+      timestamps: false,
+    };
   }
-
 }
 
-export {PRODUCTS_TABLE,  ProductsSchemas,ProductsModel}
+export { PRODUCTS_TABLE, ProductsSchemas, ProductsModel };
+

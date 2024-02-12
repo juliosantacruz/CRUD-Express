@@ -6,16 +6,18 @@ export class ProductsService {
   constructor() {}
 
   async create(data: ProductsType) {
-    const newProduct = await sequelize.models.Products.create(data);
+    const newProduct = await sequelize.models.Product.create(data);
     return newProduct;
   }
   async find() {
-    const data = await sequelize.models.Products.findAll();
+    const data = await sequelize.models.Product.findAll({
+      include:['category'],
+    });
     return data;
   }
 
   async findOne(id: number | string) {
-    const product = await sequelize.models.Products.findByPk(id);
+    const product = await sequelize.models.Product.findByPk(id);
     if (!product) {
       throw boom.notFound("products not found");
     }
